@@ -1,0 +1,10 @@
+digraph G {
+    programa_c [label="echo '{\"r\": 128, \"g\": 128, \"b\": 128}'"];
+    pipe[label="|"];
+    nc[label="netcat localhost 4455"];
+    programa_c -> pipe -> nc -> socket;
+    
+    socket[shape=oval];
+
+    draw[label="draw():\n\tfill(r, g, b)\n\t"]
+}

@@ -1,3 +1,4 @@
+// Esquema graphviz del ejemplo de más abajo
 digraph G {
     subgraph cluster_0 {
         // node[shape=square];
@@ -18,10 +19,10 @@ digraph G {
         th4 [label="Hilo 4", color="red"];
         vis [label="Visualización"];
     }
-    prog_a -> th1 [label=" | nc ..."];
-    prog_b -> th2 [label=" | nc ..."];
-    prog_c -> th3 [label=" | nc ..."];
-    prog_d -> th4 [label=" | nc ..."];
+    prog_a -> th1 [label=" netcat"];
+    prog_b -> th2 [label=" netcat"];
+    prog_c -> th3 [label=" netcat"];
+    prog_d -> th4 [label=" netcat"];
     
     th1 -> vis;
     th2 -> vis;
@@ -31,8 +32,5 @@ digraph G {
     th0->th1;
     th0->th2;
     th0->th3;
-    th0->th4;
-    
-
-    
+    th0->th4;    
 }
