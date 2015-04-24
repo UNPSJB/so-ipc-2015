@@ -1,4 +1,5 @@
 digraph G {
+
     programa_c [label="echo '{\"r\": 128, \"g\": 128, \"b\": 128}'"];
     pipe[label="|"];
     nc[label="netcat localhost 4455"];
@@ -6,5 +7,6 @@ digraph G {
     
     socket[shape=oval];
 
-    draw[label="draw():\n\tfill(r, g, b)\n\t"]
+    socket -> hilo_aceptar;
+    hilo_aceptar -> espera_clientes [rankdir=LR];
 }
