@@ -1,0 +1,38 @@
+digraph G {
+    subgraph cluster_0 {
+        // node[shape=square];
+        style=filled;
+		color=lightgrey;
+        prog_a[label="prog_a "];
+        prog_b[label="prog_b "];
+        prog_c[label="prog_c "];
+        prog_d[label="prog_d "];
+        label = "procesos de simulacion en C";
+     }
+    subgraph cluster_1 {
+        label="Processing.py"
+        th0 [label="Hilo espera clientes/accept()"]
+        th1 [label="Hilo 1", color="red"];
+        th2 [label="Hilo 2", color="red"];
+        th3 [label="Hilo 3", color="red"];
+        th4 [label="Hilo 4", color="red"];
+        vis [label="Visualización"];
+    }
+    prog_a -> th1 [label=" | nc ..."];
+    prog_b -> th2 [label=" | nc ..."];
+    prog_c -> th3 [label=" | nc ..."];
+    prog_d -> th4 [label=" | nc ..."];
+    
+    th1 -> vis;
+    th2 -> vis;
+    th3 -> vis;
+    th4 -> vis;
+    
+    th0->th1;
+    th0->th2;
+    th0->th3;
+    th0->th4;
+    
+
+    
+}
