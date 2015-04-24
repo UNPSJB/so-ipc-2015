@@ -21,8 +21,9 @@ html: ${BASEFILE}.html
 
 %.tex: %.ipynb
 	ipython nbconvert --to latex $^
+	# Remplazar los query de las url estaticas puestos para invalidar cache
+	sed -i '' 's/png\?.*\}/png\}/g'  *.tex
 
 %.pdf: %.tex
 	pdflatex $^
-	# Remplazar los query de las url estaticas puestos para invalidar cache
-	sed -i '' 's/png\?.*\}/png\}/g'  *.tex
+
