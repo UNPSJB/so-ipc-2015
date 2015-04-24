@@ -1,4 +1,4 @@
-BASEFILE=SO_TP4_Guia
+BASEFILE=SO_IPC_Guia
 all: slides
 
 slides: ${BASEFILE}.slides.html
