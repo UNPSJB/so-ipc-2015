@@ -18,21 +18,20 @@ def kill_procesos_escuchando_en_puerto(puerto):
 
 def espera_clientes(conexion, on_mensaje):
     while True:
-        cliente, direccion = conexion.accept()
-        ip, puero = direccion
-        hilo = start_new_thread(atiende_cliente, (cliente, direccion, on_mensaje))
+        cliente, (ip, puerto) = conexion.accept()
+        hilo = start_new_thread(atiende_cliente, (cliente, ip, puerto, on_mensaje))
         with hilos_lock:
             hilos[puerto] = hilo
 
-def atiende_cliente(cliente, direccion, on_mensaje):
-    print "Llegó cliente desde %s %d" % direccion
+def atiende_cliente(cliente, ip, puerto, on_mensaje):
+    print "Llegó cliente desde %s %d" % (ip, puerto)
     while True:
         cadena = cliente.recv(100)
         if not cadena:
             print "Se fue el cliente!"
             cliente.close()
             with hilos_lock:
-                del hilos[direccion[1]] # Eliminar referencia para ser GC'd
+                del hilos[puerto] # Eliminar referencia para ser GC'd
             break
         try:
             mensaje = json.loads(cadena)
