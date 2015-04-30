@@ -21360,20 +21360,19 @@ AAAAAC1pbHN0AAAAJal0b28AAAAdZGF0YQAAAAEAAAAATGF2ZjU2LjI1LjEwMQ==
 <div class="highlight"><pre><span class="n">add_library</span><span class="p">(</span><span class="s">&#39;gifAnimation&#39;</span><span class="p">)</span>
 </pre></div>
 </li>
-<li><p><strong>IMPORTANTE</strong> la carga del gif debe ser en el <code>setup()</code>, por lo tanto vamos a neceistar una variable
-global para luego poder usarla dentro del <code>draw()</code>.</p>
-<div class="highlight"><pre><span class="n">add_library</span><span class="p">(</span><span class="s">&#39;gifAnimation&#39;</span><span class="p">)</span>
- <span class="n">mi_gif</span> <span class="o">=</span> <span class="bp">None</span>
- <span class="k">def</span> <span class="nf">setup</span><span class="p">():</span>
-     <span class="k">global</span> <span class="n">mi_gif</span> <span class="c"># modificable</span>
-     <span class="n">mi_gif</span> <span class="o">=</span> <span class="n">GifAnimation</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="s">&quot;archivo.gif&quot;</span><span class="p">)</span>
-     <span class="n">mi_gif</span><span class="o">.</span><span class="n">loop</span><span class="p">()</span>
-
- <span class="k">def</span> <span class="nf">draw</span><span class="p">():</span>
-     <span class="n">image</span><span class="p">(</span><span class="n">mi_gif</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-</pre></div>
-</li>
+<li><strong>IMPORTANTE</strong> la carga del gif debe ser en el <code>setup()</code>, por lo tanto vamos a neceistar una variable
+global para luego poder usarla dentro del <code>draw()</code>.</li>
 </ul>
+<div class="highlight"><pre><span class="n">add_library</span><span class="p">(</span><span class="s">&#39;gifAnimation&#39;</span><span class="p">)</span>
+<span class="n">mi_gif</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">def</span> <span class="nf">setup</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">mi_gif</span> <span class="c"># modificable</span>
+    <span class="n">mi_gif</span> <span class="o">=</span> <span class="n">GifAnimation</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="s">&quot;archivo.gif&quot;</span><span class="p">)</span>
+    <span class="n">mi_gif</span><span class="o">.</span><span class="n">loop</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">draw</span><span class="p">():</span>
+    <span class="n">image</span><span class="p">(</span><span class="n">mi_gif</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
 
 </div>
 </div>
@@ -21381,7 +21380,7 @@ global para luego poder usarla dentro del <code>draw()</code>.</p>
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="o">%</span><span class="k">save</span> SO_IPC_Guia.ipynb
@@ -21411,18 +21410,18 @@ ipython nbconvert --to slides SO_IPC_Guia.ipynb
 [NbConvertApp] Converting notebook SO_IPC_Guia.ipynb to slides
 [NbConvertApp] Support files will be in SO_IPC_Guia_files/
 [NbConvertApp] Loaded template slides_reveal.tpl
-[NbConvertApp] Writing 1817969 bytes to SO_IPC_Guia.slides.html
-[master da96e24] Update 04/30/15 15:18:38
- 2 files changed, 94 insertions(+), 33 deletions(-)
+[NbConvertApp] Writing 1818313 bytes to SO_IPC_Guia.slides.html
+[master 23d9bf5] Update 04/30/15 15:19:11
+ 2 files changed, 43 insertions(+), 20 deletions(-)
 Counting objects: 4, done.
 Delta compression using up to 4 threads.
 Compressing objects: 100% (4/4), done.
-Writing objects: 100% (4/4), 2.28 KiB | 0 bytes/s, done.
+Writing objects: 100% (4/4), 970 bytes | 0 bytes/s, done.
 Total 4 (delta 3), reused 0 (delta 0)
 remote: This repository moved. Please use the new location:[K
 remote:   https://github.com/UNPSJB/so-ipc-2015.git[K
 To git@github.com:UNPSJB/so-tp4-2015.git
-   73c49e4..da96e24  master -&gt; master
+   da96e24..23d9bf5  master -&gt; master
 </pre>
 </div>
 </div>
