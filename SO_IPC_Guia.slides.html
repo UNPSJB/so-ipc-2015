@@ -21344,11 +21344,44 @@ AAAAAC1pbHN0AAAAJal0b28AAAAdZGF0YQAAAAEAAAAATGF2ZjU2LjI1LjEwMQ==
 
 </div>
 </div>
+</div></section>
+    </section><section>
+    <section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Utilizaci&#243;n-de-animaciones-GIF">Utilizaci&#243;n de animaciones GIF<a class="anchor-link" href="#Utilizaci&#243;n-de-animaciones-GIF">&#182;</a></h1><ul>
+<li>Descargar el la versión ZIP de la librería <code>gifAnimation</code> desde <a href="http://extrapixel.github.io/gif-animation/">http://extrapixel.github.io/gif-animation/</a></li>
+<li>Extrear la subcarpeta gifAnimation dentro de <code>$(HOME)/sketchbook/libraries</code></li>
+<li><p>Agregar al comienzo del sketch la línea</p>
+<div class="highlight"><pre><span class="n">add_library</span><span class="p">(</span><span class="s">&#39;gifAnimation&#39;</span><span class="p">)</span>
+</pre></div>
+</li>
+<li><p><strong>IMPORTANTE</strong> la carga del gif debe ser en el <code>setup()</code>, por lo tanto vamos a neceistar una variable
+global para luego poder usarla dentro del <code>draw()</code>.</p>
+<div class="highlight"><pre><span class="n">add_library</span><span class="p">(</span><span class="s">&#39;gifAnimation&#39;</span><span class="p">)</span>
+ <span class="n">mi_gif</span> <span class="o">=</span> <span class="bp">None</span>
+ <span class="k">def</span> <span class="nf">setup</span><span class="p">():</span>
+     <span class="k">global</span> <span class="n">mi_gif</span> <span class="c"># modificable</span>
+     <span class="n">mi_gif</span> <span class="o">=</span> <span class="n">GifAnimation</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="s">&quot;archivo.gif&quot;</span><span class="p">)</span>
+     <span class="n">mi_gif</span><span class="o">.</span><span class="n">loop</span><span class="p">()</span>
+
+ <span class="k">def</span> <span class="nf">draw</span><span class="p">():</span>
+     <span class="n">image</span><span class="p">(</span><span class="n">mi_gif</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</li>
+</ul>
+
+</div>
+</div>
 </div><div style=display:none>
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="o">%</span><span class="k">save</span> SO_IPC_Guia.ipynb
@@ -21378,9 +21411,18 @@ ipython nbconvert --to slides SO_IPC_Guia.ipynb
 [NbConvertApp] Converting notebook SO_IPC_Guia.ipynb to slides
 [NbConvertApp] Support files will be in SO_IPC_Guia_files/
 [NbConvertApp] Loaded template slides_reveal.tpl
-[NbConvertApp] Writing 1815782 bytes to SO_IPC_Guia.slides.html
-[master 7b1ada7] Update 04/29/15 19:19:18
- 1 file changed, 68 insertions(+), 9 deletions(-)
+[NbConvertApp] Writing 1815677 bytes to SO_IPC_Guia.slides.html
+[master 5cce006] Update 04/29/15 19:19:51
+ 1 file changed, 18 insertions(+), 14 deletions(-)
+Counting objects: 3, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 497 bytes | 0 bytes/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+remote: This repository moved. Please use the new location:[K
+remote:   https://github.com/UNPSJB/so-ipc-2015.git[K
+To git@github.com:UNPSJB/so-tp4-2015.git
+   7b1ada7..5cce006  master -&gt; master
 </pre>
 </div>
 </div>
@@ -21389,22 +21431,7 @@ ipython nbconvert --to slides SO_IPC_Guia.ipynb
 </div>
 
 </div>
-    </div><div class="fragment" data-fragment-index="34">
-        
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre> 
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-        </div></section>
+    </div></section>
     </section>
 </div>
 </div>
