@@ -1,23 +1,27 @@
 # src/cascara/imagenes.pyde 
-
+from random import seed, randint
 from conexiones import escuchar_clientes_en_hilo
 from imagenes import cargar_imagenes_carpeta
 
 # Variables Globales
+ancho, alto = 500, 500
 conexion = None
+fondo = None
 IMAGENES = cargar_imagenes_carpeta("*.png")
+seed()
 
 elem_pantalla = {
-    1: {"x": 100, "y": 100, "imagen": "1.png"}, 
-    2: {"x": 0, "y": 200,   "imagen": "2.png"},
-    3: {"x": 80, "y": 200,  "imagen": "2.png"},
+    1: {"x": randint(0, ancho), "y": randint(0, alto), "imagen": "1.png"}, 
+    2: {"x": randint(0, ancho), "y": randint(0, alto),   "imagen": "2.png"},
+    3: {"x": randint(0, ancho), "y": randint(0, alto),  "imagen": "3.png"},
 }
+fondo = loadImage('bg.jpg')
 
 def setup():
     '''Inicialización'''
     global conexion
     size(500, 500)
-    
+     
     conexion = escuchar_clientes_en_hilo(
         on_mensaje=procesar_mensaje,
         matar_otros=True
@@ -26,6 +30,9 @@ def setup():
 def procesar_mensaje(mensaje):
     n = mensaje["numero"]
     
+    if n not in elem_pantalla:
+        elem_pantalla[n] = {"imagen": "", "x": 250, "y": 250}
+        
     if 'x' in mensaje:
         elem_pantalla[n]['x'] = mensaje['x']
     if 'y' in mensaje:
@@ -42,7 +49,8 @@ def stop():
         conexion.close()
 
 def draw():
-    background(255, 255, 255) # Limpiar
+    #background(255, 255, 255) # Limpiar
+    image(fondo, 0, 0, ancho, alto)
     for id, elem in elem_pantalla.items():
         try:
             imagen = IMAGENES[elem["imagen"]]

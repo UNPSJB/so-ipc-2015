@@ -1,9 +1,11 @@
 # coding: utf-8
 import subprocess
 import json
-from thread import start_new_thread # versión de pthread_create
+from thread import start_new_thread, allocate_lock
 import socket
-hilos = []
+
+hilos_lock = allocate_lock()
+hilos = {} # Evitar que sean eliminados por el GC
 
 def kill_procesos_escuchando_en_puerto(puerto):
     assert 1024 < puerto < 65536
@@ -12,14 +14,15 @@ def kill_procesos_escuchando_en_puerto(puerto):
     for pid in pids:
         if pid and int(pid) != os.getpid():
             print "Matando proceso %s que escucha el puerto 4455"
-            subprocess.call('kill -9 %s' % pid, shell=True) 
+            subprocess.call('kill -9 %s' % pid, shell=True)
 
 def espera_clientes(conexion, on_mensaje):
-    global cajas
     while True:
         cliente, direccion = conexion.accept()
+        ip, puero = direccion
         hilo = start_new_thread(atiende_cliente, (cliente, direccion, on_mensaje))
-        hilos.append(hilo)
+        with hilos_lock:
+            hilos[puerto] = hilo
 
 def atiende_cliente(cliente, direccion, on_mensaje):
     print "Llegó cliente desde %s %d" % direccion
@@ -27,6 +30,9 @@ def atiende_cliente(cliente, direccion, on_mensaje):
         cadena = cliente.recv(100)
         if not cadena:
             print "Se fue el cliente!"
+            cliente.close()
+            with hilos_lock:
+                del hilos[direccion[1]] # Eliminar referencia para ser GC'd
             break
         try:
             mensaje = json.loads(cadena)
