@@ -21378,35 +21378,117 @@ global para luego poder usarla dentro del <code>draw()</code>.</li>
 </div>
 </div></section><section>
     
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Ejemplo-Completo-con-Gif">Ejemplo Completo con Gif<a class="anchor-link" href="#Ejemplo-Completo-con-Gif">&#182;</a></h1><div class="highlight"><pre><span class="n">add_library</span><span class="p">(</span><span class="s">&quot;gifAnimation&quot;</span><span class="p">)</span>
+
+<span class="n">imagen</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">dx</span><span class="p">,</span> <span class="n">dy</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span>
+<span class="n">ancho</span><span class="p">,</span> <span class="n">alto</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">500</span>
+<span class="n">ancho_imagen</span><span class="p">,</span> <span class="n">alto_imagen</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span>
+<span class="k">def</span> <span class="nf">setup</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">imagen</span>
+    <span class="n">size</span><span class="p">(</span><span class="n">ancho</span><span class="p">,</span> <span class="n">alto</span><span class="p">)</span>
+    <span class="n">imagen</span> <span class="o">=</span> <span class="n">GifAnimation</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="s">&quot;lechuza.gif&quot;</span><span class="p">)</span>
+    <span class="n">imagen</span><span class="o">.</span><span class="n">play</span><span class="p">()</span>
+    <span class="k">print</span> <span class="nb">dir</span><span class="p">(</span><span class="n">imagen</span><span class="p">)</span>
+    <span class="n">imagen</span><span class="o">.</span><span class="n">loop</span><span class="p">()</span>
+
+
+
+<span class="k">def</span> <span class="nf">draw</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">imagen</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span>
+    <span class="n">fill</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">background</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">image</span><span class="p">(</span><span class="n">imagen</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ancho_imagen</span><span class="p">,</span> <span class="n">alto_imagen</span><span class="p">)</span>
+    <span class="n">text</span><span class="p">(</span><span class="s">&quot;x:</span><span class="si">%d</span><span class="s"> y:</span><span class="si">%d</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">+</span><span class="n">alto_imagen</span><span class="o">+</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">+=</span> <span class="n">dx</span>
+    <span class="n">y</span> <span class="o">+=</span> <span class="n">dy</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="o">-</span><span class="n">dx</span>
+    <span class="k">elif</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">ancho</span> <span class="o">-</span> <span class="n">ancho_imagen</span><span class="p">):</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="o">-</span><span class="n">dx</span>
+
+    <span class="k">if</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">dy</span> <span class="o">=</span> <span class="o">-</span><span class="n">dy</span>
+    <span class="k">elif</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">alto</span> <span class="o">-</span> <span class="n">alto_imagen</span><span class="p">):</span>
+        <span class="n">dy</span> <span class="o">=</span> <span class="o">-</span><span class="n">dy</span>
+</pre></div>
+<p>Ver ejmplo en <a href="./src/gif_animation">src/gif_animation</a> y el <a href="src/gif_animation/lechuza.gif">GIF</a></p>
+
+</div>
+</div>
+</div></section><section>
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">YouTubeVideo</span>
-<span class="n">YouTubeVideo</span><span class="p">(</span>
+<span class="n">YouTubeVideo</span><span class="p">(</span><span class="s">&#39;mY98wGZiXVU&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s">&#39;100%&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[14]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+
+        <iframe
+            width="100%"
+            height="300"
+            src="https://www.youtube.com/embed/mY98wGZiXVU"
+            frameborder="0"
+            allowfullscreen
+        ></iframe>
+        
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div></section>
+    </section><section>
+    <section>
+    
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Utilizar-Bash-desde-Processing">Utilizar Bash desde Processing<a class="anchor-link" href="#Utilizar-Bash-desde-Processing">&#182;</a></h1><p>Mediante el módulo <strong>subprocess</strong> a través de la función</p>
+<p><code>call("mi_script.sh", shell=True)</code></p>
+<p>por detrás está ejecutando "/bin/sh mi_script.sh" que puede ser útil para:</p>
+
+<pre><code>- Lanzar procesos para la simulación (ej: en setup())
+- Matar procesos de la simulación (ej: en stop())
+- Limpiar recursos como semáforos o memorias compartidas (ej: en stop())</code></pre>
+
+</div>
+</div>
 </div><div style=display:none>
     
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span class="o">%</span><span class="k">save</span> SO_IPC_Guia.ipynb
 <span class="o">!</span>make slides
 <span class="o">!</span>open SO_IPC_Guia.slides.html
-<span class="c"># Commitear</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="n">fecha</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%x</span><span class="s"> </span><span class="si">%X</span><span class="s">&#39;</span><span class="p">)</span>
-<span class="o">!</span>git add -u
-<span class="o">!</span>git commit -m <span class="s2">&quot;Update </span><span class="nv">$fecha</span><span class="s2">&quot;</span>
-<span class="o">!</span>git push origin master
 </pre></div>
 
 </div>
@@ -21425,18 +21507,7 @@ ipython nbconvert --to slides SO_IPC_Guia.ipynb
 [NbConvertApp] Converting notebook SO_IPC_Guia.ipynb to slides
 [NbConvertApp] Support files will be in SO_IPC_Guia_files/
 [NbConvertApp] Loaded template slides_reveal.tpl
-[NbConvertApp] Writing 1818299 bytes to SO_IPC_Guia.slides.html
-[master 1f54d0f] Update 04/30/15 15:20:05
- 2 files changed, 32 insertions(+), 33 deletions(-)
-Counting objects: 4, done.
-Delta compression using up to 4 threads.
-Compressing objects: 100% (4/4), done.
-Writing objects: 100% (4/4), 948 bytes | 0 bytes/s, done.
-Total 4 (delta 3), reused 0 (delta 0)
-remote: This repository moved. Please use the new location:[K
-remote:   https://github.com/UNPSJB/so-ipc-2015.git[K
-To git@github.com:UNPSJB/so-tp4-2015.git
-   23d9bf5..1f54d0f  master -&gt; master
+[NbConvertApp] Writing 1826945 bytes to SO_IPC_Guia.slides.html
 </pre>
 </div>
 </div>
@@ -21445,22 +21516,43 @@ To git@github.com:UNPSJB/so-tp4-2015.git
 </div>
 
 </div>
-    </div><div class="fragment" data-fragment-index="34">
-        
+    </div><div style=display:none>
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre> 
+<div class=" highlight hl-ipython2"><pre><span class="c"># Commitear</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="n">fecha</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%x</span><span class="s"> </span><span class="si">%X</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="o">!</span>git add -u
+<span class="o">!</span>git commit -m <span class="s2">&quot;Update </span><span class="nv">$fecha</span><span class="s2">&quot;</span>
+<span class="o">!</span>git push origin master
 </pre></div>
 
 </div>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[master 70e5684] Update 05/01/15 19:46:41
+ 1 file changed, 48 insertions(+), 22 deletions(-)
+^C
+</pre>
 </div>
-        </div></section>
+</div>
+
+</div>
+</div>
+
+</div>
+    </div></section>
     </section>
 </div>
 </div>
