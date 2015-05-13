@@ -26,7 +26,8 @@ def espera_clientes(conexion, on_mensaje):
 def atiende_cliente(cliente, ip, puerto, on_mensaje):
     print "Llegó cliente desde %s %d" % (ip, puerto)
     while True:
-        cadena = cliente.recv(100)
+        cadena = cliente.recv(4096)
+        print cadena
         if not cadena:
             print "Se fue el cliente!"
             cliente.close()
@@ -40,7 +41,7 @@ def atiende_cliente(cliente, ip, puerto, on_mensaje):
             else:
                 on_mensaje(mensaje)
         except ValueError:
-            print "Porblemas con JSON"
+            print "Porblemas con JSON: %s" % cadena
         except KeyError as e:
             print "JSON no tiene algun atributo necesario %s" % e
 
