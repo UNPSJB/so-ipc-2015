@@ -3,6 +3,7 @@ import subprocess
 import json
 from thread import start_new_thread, allocate_lock
 import socket
+from separador import SeparaJSON
 
 hilos_lock = allocate_lock()
 hilos = {} # Evitar que sean eliminados por el GC
@@ -25,6 +26,7 @@ def espera_clientes(conexion, on_mensaje):
 
 def atiende_cliente(cliente, ip, puerto, on_mensaje):
     print "Llegó cliente desde %s %d" % (ip, puerto)
+    separador = SeparaJSON()
     while True:
         cadena = cliente.recv(4096)
         print cadena
@@ -34,16 +36,18 @@ def atiende_cliente(cliente, ip, puerto, on_mensaje):
             with hilos_lock:
                 del hilos[puerto] # Eliminar referencia para ser GC'd
             break
-        try:
-            mensaje = json.loads(cadena)
-            if 'numero' not in mensaje:
-                print "El cliente no dijo que modificar"
-            else:
-                on_mensaje(mensaje)
-        except ValueError:
-            print "Porblemas con JSON: %s" % cadena
-        except KeyError as e:
-            print "JSON no tiene algun atributo necesario %s" % e
+        
+        for mensaje in separador:
+            try:
+                mensaje = json.loads(cadena)
+                if 'numero' not in mensaje:
+                    print "El cliente no dijo que modificar"
+                else:
+                    on_mensaje(mensaje)
+            except ValueError:
+                print "Porblemas con JSON: %s" % cadena
+            except KeyError as e:
+                print "JSON no tiene algun atributo necesario %s" % e
 
 def escuchar_clientes_en_hilo(on_mensaje=None, puerto=4455, matar_otros=False):
     """
