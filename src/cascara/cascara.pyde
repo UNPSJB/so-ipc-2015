@@ -49,8 +49,8 @@ def stop():
         conexion.close()
 
 def draw():
-    #background(255, 255, 255) # Limpiar
-    image(fondo, 0, 0, ancho, alto)
+    background(255, 255, 255) # Limpiar
+    #image(fondo, 0, 0, ancho, alto)
     for id, elem in elem_pantalla.items():
         try:
             imagen = IMAGENES[elem["imagen"]]
